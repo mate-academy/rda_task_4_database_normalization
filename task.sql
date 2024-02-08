@@ -39,6 +39,10 @@ INSERT INTO Countries (ID,Name)
 	VALUES (2, 'Country2');
     
 INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (1, 1, 2, 1, 1, 1, 1);
+	VALUES (1, 'AwersomeProduct', 2, 'Warehouse-1', 'City-1, Street-1',1);
 INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (2, 1, 5, 2, 2, 2, 2);
+	VALUES (2, 'AwersomeProduct', 5, 'Warehouse-2', 'City-2, Street-2',2);
+INSERT INTO ProductInventory (ID, ProductID, WarehouseID, WarehouseAmount)
+	VALUES (1, 1, 1, 1);
+INSERT INTO ProductInventory (ID, ProductID, WarehouseID, WarehouseAmount)
+	VALUES (2, 1, 2, 2);
