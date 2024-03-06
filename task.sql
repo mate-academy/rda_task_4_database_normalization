@@ -1,5 +1,4 @@
 -- Create database and tables
-
 CREATE DATABASE ShopDB;
 USE ShopDB;
 
@@ -9,25 +8,46 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE ProductInventory (
+CREATE TABLE Warehouses (
     ID INT,
-    ProductName VARCHAR(50),
-    WarehouseAmount INT,
-    WarehouseName VARCHAR(50),
-    WarehouseAddress VARCHAR(50), 
+    Name VARCHAR(50),
+    Address VARCHAR(50),
     CountryID INT,
-	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION
+);
+
+CREATE TABLE Products (
+    ID INT,
+    Name VARCHAR(50),
     PRIMARY KEY (ID)
 );
 
--- Populate test data
+CREATE TABLE ProductInventory (
+    ID INT,
+    ProductID INT,
+    WarehouseID INT,
+    Amount INT,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ID) ON DELETE NO ACTION,
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION
+);
 
-INSERT INTO Countries (ID,Name)
-	VALUES (1, 'Country1');
-INSERT INTO Countries (ID,Name)
-	VALUES (2, 'Country2');
-    
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (1, 'AwersomeProduct', 2, 'Warehouse-1', 'City-1, Street-1',1);
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (2, 'AwersomeProduct', 5, 'Warehouse-2', 'City-2, Street-2',2);
+-- Populate test data
+INSERT INTO Countries (ID, Name) 
+    VALUES (1, 'Country1');
+INSERT INTO Countries (ID, Name) 
+    VALUES (2, 'Country2');
+
+INSERT INTO Warehouses (ID, Name, Address, CountryID) 
+    VALUES (1, 'Warehouse-1', 'City-1, Street-1', 1);
+INSERT INTO Warehouses (ID, Name, Address, CountryID) 
+    VALUES (2, 'Warehouse-2', 'City-2, Street-2', 2);
+
+INSERT INTO Products (ID, Name) 
+    VALUES (1, 'AwesomeProduct');
+
+INSERT INTO ProductInventory (ID, ProductID, WarehouseID, Amount) 
+    VALUES (1, 1, 1, 2);
+INSERT INTO ProductInventory (ID, ProductID, WarehouseID, Amount) 
+    VALUES (2, 1, 2, 5);
