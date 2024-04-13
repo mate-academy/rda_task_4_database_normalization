@@ -36,11 +36,6 @@ CREATE TABLE ProductInventory (
 
 -- Populate test data
 
-CREATE TABLE Shop (
-  ID INT,
-
-)
-
 INSERT INTO Countries (ID, Name)
 	VALUES (1, 'Country1');
 INSERT INTO Countries (ID, Name)
