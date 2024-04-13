@@ -27,9 +27,9 @@ CREATE TABLE Product (
 CREATE TABLE ProductInventory (
   ID INT,
   ProductID INT,
-  FOREIGN KEY (ProductID) REFERENCES Product(ID) ON DELETE NO ACTION,
+  WarehouseID INT,
   WarehouseAmount INT,
-  WarehouseID
+  FOREIGN KEY (ProductID) REFERENCES Product(ID) ON DELETE CASCADE,
   FOREIGN KEY (WarehouseID) REFERENCES Warehouse(ID) ON DELETE NO ACTION, 
   PRIMARY KEY (ID)
 );
