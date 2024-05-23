@@ -37,7 +37,7 @@
   | 1          | Warehouse-1 | 1 | City-1, Street-1 |
   | 2          | Warehouse-2 | 2 | City-2, Street-2 |
 
-  | Inventory<br /> |   |   |        |
+  | ProductInventory<br /> |   |   |        |
   | ------------- | --- | --- | -------- |
   | **ID**(PK)            | *ProductID(FK)*   | *WarehouseID(FK)*   | Amount |
   | 1           | 1 | 1 | 2      |
