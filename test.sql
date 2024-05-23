@@ -1,31 +1,59 @@
+-- Create database and tables
+
+CREATE DATABASE ShopDB;
 USE ShopDB;
 
--- 1. check the number of tables (should be 4 - 1 new table for the Warehouses + 1 new table for Products) 
-SET @TablesCount := ( SELECT count(*) AS TOTALNUMBEROFTABLES
-    FROM INFORMATION_SCHEMA.TABLES
-    WHERE TABLE_SCHEMA = 'ShopDB'); 
-SELECT IF( @TablesCount = 4, 'The total number of tables in the database is correct', 'Error: too many or not enough tables were created in the database');
+CREATE TABLE `Products List` (				
+    ID INT,
+    `Product Name` VARCHAR(50),
+    
+	PRIMARY KEY (ID)
+);
 
--- 2. check the number of columns in the ProductInventory table - should be 4 (ID, ProductID, WarehouseAmount, WarehouseID) 
-SET @ColumntCount := (SELECT count(*)
-FROM information_schema.columns
-WHERE table_name = 'ProductInventory' and TABLE_SCHEMA = 'ShopDB'); 
-SELECT IF( @ColumntCount = 4, 'The total number of columns in the ProductInventory is correct', 'Error: too many or not enough columnts in the ProductInventory table');
+CREATE TABLE Countries (
+    ID INT,
+    Country VARCHAR(50),
+    
+	PRIMARY KEY (ID)
+);
 
--- 3. check the number of foreign keys in the ProductInventory table - should be 2 (ProductID, WarehouseID) 
-SET @ForeignKeysCount := (SELECT count(*) FROM information_schema.TABLE_CONSTRAINTS 
-WHERE information_schema.TABLE_CONSTRAINTS.CONSTRAINT_TYPE = 'FOREIGN KEY' 
-AND information_schema.TABLE_CONSTRAINTS.TABLE_SCHEMA = 'ShopDB'
-AND information_schema.TABLE_CONSTRAINTS.TABLE_NAME = 'ProductInventory'); 
-SELECT IF( @ForeignKeysCount = 2, 'The total number of foreign keys in the ProductInventory is correct', 'Error: too many or not enough foreign keys in the ProductInventory table');
+CREATE TABLE Warehouses (
+    ID INT,
+	Warehouse VARCHAR(50),
+    CountryID INT,
+    Address VARCHAR(50),
+    
+	PRIMARY KEY (ID),
+	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION
+);
 
--- 4. check if the CountryID foreign key is removed - it should be in the Warehouses table now 
-SET @CountryForeignKeysCount := (SELECT count(*) FROM information_schema.REFERENTIAL_CONSTRAINTS
-WHERE CONSTRAINT_SCHEMA = 'ShopDB'
-AND TABLE_NAME = 'ProductInventory'
-AND REFERENCED_TABLE_NAME = 'Countries'); 
-SELECT IF( @CountryForeignKeysCount = 0, 'The Country foreign key is not present in the ProductInventory table', 'Error: CountryID foreign key is present in the ProductInventory table');
+CREATE TABLE ProductInventory (
+    ID INT,
+    ProductID INT,
+    WarehouseID INT,
+    Amount INT,
+    
+	PRIMARY KEY (ID),
+	FOREIGN KEY (ProductID) REFERENCES `Products List`(ID) ON DELETE NO ACTION,
+	FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION	
+);
 
--- 5. check the number of records in the product inventory
-SET @ProductInventoryItemsCount := (SELECT count(*) FROM ProductInventory); 
-SELECT IF( @ProductInventoryItemsCount = 2, 'The Product inventory items are in place', 'Error: too many or not enough ProductInventory items in the database!');
+-- Insert data
+
+INSERT INTO `Products List` (ID,`Product Name`)
+	VALUES (1, 'AwersomeProduct');
+
+INSERT INTO Countries (ID,Country)
+	VALUES (1, 'Country1');
+INSERT INTO Countries (ID,Country)
+	VALUES (2, 'Country2');
+    
+INSERT INTO Warehouses (ID,Warehouse,CountryID,Address)
+	VALUES (1, 'Warehouse-1', 1, 'City-1, Street-1');
+INSERT INTO Warehouses (ID,Warehouse,CountryID,Address)
+	VALUES (2, 'Warehouse-2', 2, 'City-2, Street-2');
+
+INSERT INTO ProductInventory (ID,ProductID,WarehouseID,Amount)
+	VALUES (1, 1, 1, 2);
+INSERT INTO ProductInventory (ID,ProductID,WarehouseID,Amount)
+	VALUES (2, 1, 2, 5);
