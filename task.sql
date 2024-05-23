@@ -1,3 +1,7 @@
+-- Clearing prev test results
+
+DROP DATABASE ShopDB;
+
 -- Create database and tables
 
 CREATE DATABASE ShopDB;
