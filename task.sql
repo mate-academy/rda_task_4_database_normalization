@@ -2,7 +2,7 @@ CREATE DATABASE ShopDB;
 USE ShopDB;
 
 CREATE TABLE Countries (
-    ID INT,
+    ID INT AUTO_INCREMENT,
     Name VARCHAR(50),
     PRIMARY KEY (ID)
 );
