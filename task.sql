@@ -1,33 +1,54 @@
--- Create database and tables
-
+-- 0. Очистити стару базу, якщо існує
+DROP DATABASE IF EXISTS ShopDB;
 CREATE DATABASE ShopDB;
 USE ShopDB;
 
+-- 1. Таблиця країн
 CREATE TABLE Countries (
-    ID INT,
-    Name VARCHAR(50),
-    PRIMARY KEY (ID)
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50)
 );
 
-CREATE TABLE ProductInventory (
-    ID INT,
-    ProductName VARCHAR(50),
-    WarehouseAmount INT,
-    WarehouseName VARCHAR(50),
-    WarehouseAddress VARCHAR(50), 
+-- 2. Таблиця продуктів
+CREATE TABLE Products (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL
+);
+
+-- 3. Таблиця складів
+CREATE TABLE Warehouses (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Name VARCHAR(50) NOT NULL,
+    Address VARCHAR(100) NOT NULL,
     CountryID INT,
-	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
-    PRIMARY KEY (ID)
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID)
 );
 
--- Populate test data
+-- 4. Таблиця залишків товарів
+CREATE TABLE ProductInventory (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    ProductID INT,
+    WarehouseID INT,
+    WarehouseAmount INT,
+    FOREIGN KEY (ProductID) REFERENCES Products(ID),
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID)
+);
 
-INSERT INTO Countries (ID,Name)
-	VALUES (1, 'Country1');
-INSERT INTO Countries (ID,Name)
-	VALUES (2, 'Country2');
-    
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (1, 'AwersomeProduct', 2, 'Warehouse-1', 'City-1, Street-1',1);
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (2, 'AwersomeProduct', 5, 'Warehouse-2', 'City-2, Street-2',2);
+-- Дані для країн
+INSERT INTO Countries (ID, Name) VALUES
+(1, 'Country1'),
+(2, 'Country2');
+
+-- Дані для продуктів
+INSERT INTO Products (Name) VALUES
+('AwersomeProduct'); -- ID = 1
+
+-- Дані для складів
+INSERT INTO Warehouses (Name, Address, CountryID) VALUES
+('Warehouse-1', 'City-1, Street-1', 1), -- ID = 1
+('Warehouse-2', 'City-2, Street-2', 2); -- ID = 2
+
+-- Дані для ProductInventory (саме 2 записи)
+INSERT INTO ProductInventory (ProductID, WarehouseID, WarehouseAmount) VALUES
+(1, 1, 2),
+(1, 2, 5);
