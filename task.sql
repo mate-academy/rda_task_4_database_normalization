@@ -9,14 +9,28 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
+create table Warehouse (
+	ID int,
+    Name varchar(50),
+    Address varchar(50),
+    CountryID int,
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
+	primary key (ID)
+);
+
+create table Product (
+	ID int,
+    Name VARCHAR(50),
+    primary key (ID)
+);
+
 CREATE TABLE ProductInventory (
     ID INT,
-    ProductName VARCHAR(50),
     WarehouseAmount INT,
-    WarehouseName VARCHAR(50),
-    WarehouseAddress VARCHAR(50), 
-    CountryID INT,
-	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
+    ProductID int,
+    WarehouseID int,
+    foreign key (WarehouseID) references Warehouse(ID) on delete no action,
+    foreign key (ProductID) references Product(ID) on delete no action,	
     PRIMARY KEY (ID)
 );
 
@@ -27,7 +41,16 @@ INSERT INTO Countries (ID,Name)
 INSERT INTO Countries (ID,Name)
 	VALUES (2, 'Country2');
     
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (1, 'AwersomeProduct', 2, 'Warehouse-1', 'City-1, Street-1',1);
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (2, 'AwersomeProduct', 5, 'Warehouse-2', 'City-2, Street-2',2);
+insert into Product (ID,Name)
+	values (1, 'AwersomeProduct');
+    
+insert into Warehouse (ID,Name,Address,CountryID)
+	values (1, 'Warehouse-1', 'City-1, Street-1', 1);
+    
+insert into Warehouse (ID,Name,Address,CountryID)
+	values (2, 'Warehouse-2', 'City-2, Street-2', 2);
+    
+INSERT INTO ProductInventory (ID,ProductID,WarehouseAmount,WarehouseID)
+	VALUES (1, 1, 2, 1);
+INSERT INTO ProductInventory (ID,ProductID,WarehouseAmount,WarehouseID)
+	VALUES (2, 1, 5, 2);
