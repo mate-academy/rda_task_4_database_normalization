@@ -21,7 +21,6 @@ PRIMARY KEY (ID)
 CREATE TABLE Warehouses(
 	ID INT,
 	WarehouseName VARCHAR(50),
-    WarehouseAddress VARCHAR(50), 
     WarehouseAmount INT,
 	PRIMARY KEY (ID)
 );
@@ -44,9 +43,9 @@ INSERT INTO Countries (ID,Name)
 	VALUES (2, 'Country2');
 
 INSERT INTO Addresses (ID,Street,City,CountryID)
-	VALUES (1, 'City-1', 'Street-1', 1);
+	VALUES (1, 'Street-1', 'City-1', 1);
 INSERT INTO Addresses (ID,Street,City,CountryID)
-	VALUES (2, 'City-2', 'Street-2', 2);
+	VALUES (2, 'Street-2', 'City-2', 2);
 
 INSERT INTO Warehouses (ID,WarehouseName,WarehouseAmount)
 	VALUES (1, 'Warehouse-1', 2);
