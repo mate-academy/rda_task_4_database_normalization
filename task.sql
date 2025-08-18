@@ -12,7 +12,6 @@ CREATE TABLE Countries (
 CREATE TABLE Products (
     ID INT,
     Name VARCHAR(50),
-    WarehouseAmount INT,
     PRIMARY KEY (ID)
 );
 
