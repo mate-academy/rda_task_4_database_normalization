@@ -1,4 +1,3 @@
--- Drop old database if needed
 DROP DATABASE IF EXISTS ShopDB;
 CREATE DATABASE ShopDB;
 USE ShopDB;
@@ -9,7 +8,7 @@ CREATE TABLE Countries (
     CountryName VARCHAR(50) NOT NULL
 );
 
--- Warehouses (linked to country)
+-- Warehouses
 CREATE TABLE Warehouses (
     WarehouseID INT PRIMARY KEY,
     WarehouseName VARCHAR(50) NOT NULL,
@@ -24,14 +23,14 @@ CREATE TABLE Products (
     ProductName VARCHAR(50) NOT NULL
 );
 
--- Inventory (link table: warehouse ↔ product)
-CREATE TABLE Inventory (
-    InventoryID INT PRIMARY KEY,
-    WarehouseID INT NOT NULL,
+-- ProductInventory (normalized: just IDs + quantity)
+CREATE TABLE ProductInventory (
+    ID INT PRIMARY KEY,
     ProductID INT NOT NULL,
-    Quantity INT NOT NULL,
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(WarehouseID) ON DELETE CASCADE,
-    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE
+    WarehouseAmount INT NOT NULL,
+    WarehouseID INT NOT NULL,
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID) ON DELETE CASCADE,
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(WarehouseID) ON DELETE CASCADE
 );
 
 -- Countries
@@ -48,7 +47,7 @@ INSERT INTO Warehouses (WarehouseID, WarehouseName, WarehouseAddress, CountryID)
 INSERT INTO Products (ProductID, ProductName) VALUES
 (1, 'AwersomeProduct');
 
--- Inventory (Product in Warehouse)
-INSERT INTO Inventory (InventoryID, WarehouseID, ProductID, Quantity) VALUES
-(1, 1, 1, 2),  -- 2 products in Warehouse-1
-(2, 2, 1, 5);  -- 5 products in Warehouse-2
+-- Product Inventory
+INSERT INTO ProductInventory (ID, ProductID, WarehouseAmount, WarehouseID) VALUES
+(1, 1, 2, 1),  -- 2 products in Warehouse-1
+(2, 1, 5, 2);  -- 5 products in Warehouse-2
