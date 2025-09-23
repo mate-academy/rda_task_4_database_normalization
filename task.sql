@@ -60,4 +60,6 @@ INSERT INTO Warehouses (Name, Address, CountryID) VALUES
 -- Insert product inventories
 INSERT INTO ProductInventories (ProductID, WarehouseID, WarehouseAmount) VALUES
 (1, 1, 2),
-(1, 2, 5);
+(1, 2, 5),
+(2, 1, 3),
+(2, 2, 7);
