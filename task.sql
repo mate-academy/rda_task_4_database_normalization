@@ -2,31 +2,36 @@ DROP DATABASE IF EXISTS ShopDB;
 CREATE DATABASE ShopDB;
 USE ShopDB;
 
+
 CREATE TABLE Countries (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(50) NOT NULL
 );
 
+
 CREATE TABLE Warehouses (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(50) NOT NULL,
     Address VARCHAR(100),
-    CountryID INT,
+    CountryID INT NOT NULL,
     FOREIGN KEY (CountryID) REFERENCES Countries(ID)
 );
+
 
 CREATE TABLE Products (
     ID INT AUTO_INCREMENT PRIMARY KEY,
     Name VARCHAR(50) NOT NULL
 );
 
+
 CREATE TABLE ProductInventory (
     ID INT AUTO_INCREMENT PRIMARY KEY,
-    ProductID INT,
-    WarehouseID INT,
-    WarehouseAmount INT,
+    ProductID INT NOT NULL,
+    WarehouseID INT NOT NULL,
+    WarehouseAmount INT UNSIGNED NOT NULL DEFAULT 0,
     FOREIGN KEY (ProductID) REFERENCES Products(ID),
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID)
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID),
+    UNIQUE (ProductID, WarehouseID)
 );
 
 INSERT INTO Countries (Name)
