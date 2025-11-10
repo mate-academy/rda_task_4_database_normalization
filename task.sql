@@ -1,4 +1,5 @@
 -- Create database and tables
+DROP DATABASE IF EXISTS ShopDB;
 
 CREATE DATABASE ShopDB;
 USE ShopDB;
