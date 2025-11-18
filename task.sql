@@ -1,4 +1,5 @@
 -- Create database and tables
+DROP DATABASE IF EXISTS ShopDB;
 CREATE DATABASE ShopDB;
 USE ShopDB;
 
@@ -26,14 +27,14 @@ CREATE TABLE Warehouses (
     PRIMARY KEY (ID)
 );
 
--- ProductInventory
+-- ProductInventory table
 CREATE TABLE ProductInventory (
     ID              INT,
     ProductID       INT,
     WarehouseAmount INT,
     WarehouseID     INT,
-    FOREIGN KEY (ProductID)    REFERENCES Products(ID)    ON DELETE NO ACTION,
-    FOREIGN KEY (WarehouseID)  REFERENCES Warehouses(ID) ON DELETE NO ACTION,
+    FOREIGN KEY (ProductID)   REFERENCES Products(ID)    ON DELETE NO ACTION,
+    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION,
     PRIMARY KEY (ID)
 );
 
@@ -51,4 +52,11 @@ INSERT INTO Products (ID, Name)
 VALUES (1, 'AwesomeProduct');
 
 -- Warehouses
-INSERT INTO Warehouses (ID, Nam
+INSERT INTO Warehouses (ID, Name, Address, CountryID)
+VALUES (1, 'Warehouse-1', 'City-1, Street-1', 1),
+       (2, 'Warehouse-2', 'City-2, Street-2', 2);
+
+-- Product inventory
+INSERT INTO ProductInventory (ID, ProductID, WarehouseAmount, WarehouseID)
+VALUES (1, 1, 2, 1),
+       (2, 1, 5, 2);
