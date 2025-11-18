@@ -9,14 +9,14 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
--- New table: Products
+-- Products table
 CREATE TABLE Products (
     ID   INT,
     Name VARCHAR(50),
     PRIMARY KEY (ID)
 );
 
--- New table: Warehouses
+-- Warehouses table
 CREATE TABLE Warehouses (
     ID        INT,
     Name      VARCHAR(50),
@@ -32,13 +32,23 @@ CREATE TABLE ProductInventory (
     ProductID       INT,
     WarehouseAmount INT,
     WarehouseID     INT,
-    FOREIGN KEY (ProductID)  REFERENCES Products(ID)   ON DELETE NO ACTION,
-    FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION,
+    FOREIGN KEY (ProductID)    REFERENCES Products(ID)    ON DELETE NO ACTION,
+    FOREIGN KEY (WarehouseID)  REFERENCES Warehouses(ID) ON DELETE NO ACTION,
     PRIMARY KEY (ID)
 );
 
+-- =========================
 -- Populate test data
+-- =========================
 
 -- Countries
-INSERT INTO Count
+INSERT INTO Countries (ID, Name)
+VALUES (1, 'Country1'),
+       (2, 'Country2');
 
+-- Products
+INSERT INTO Products (ID, Name)
+VALUES (1, 'AwesomeProduct');
+
+-- Warehouses
+INSERT INTO Warehouses (ID, Nam
