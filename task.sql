@@ -31,7 +31,7 @@ CREATE TABLE ProductInventory (
 );
 
 INSERT INTO Countries (Name) VALUES ('Country1');
-INSERT INTO Warehouse (WarehouseName, CountryID) VALUES ('Warehouse-1', 1), ('Warehouse-2', 1);
+INSERT INTO Warehouse (WarehouseName, CountryID, WarehouseAddress) VALUES ('Warehouse-1', 1, 'City-1, Street-1'), ('Warehouse-2', 1, 'City-2, Street-2');
 INSERT INTO Products (ProductName) VALUES ('AwesomeProduct');
 
 INSERT INTO ProductInventory (ProductID, WarehouseAmount, WarehouseID)
