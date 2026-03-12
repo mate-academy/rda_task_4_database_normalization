@@ -39,6 +39,6 @@ INSERT INTO Warehouses (WarehouseName,WarehouseAddress,CountryID)
     VALUES ('Warehouse-1', 'City-1, Street-1',1), ('Warehouse-2', 'City-2, Street-2',2);
     
 INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount)
-	VALUES (1, 'AwersomeProduct', 2);
+	VALUES (1, 'AwersomeProduct', 1, 2);
 INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount)
-	VALUES (2, 'AwersomeProduct', 5);
+	VALUES (2, 'AwersomeProduct', 2, 5);
