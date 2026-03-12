@@ -23,7 +23,7 @@ CREATE TABLE ProductInventory (
     ProductName VARCHAR(50),
     WarehouseId INT,
     WarehouseAmount INT,
-    FOREIGN KEY WarehouseId REFERENCES Warehouses(ID)
+    FOREIGN KEY (WarehouseId) REFERENCES Warehouses(ID)
     	ON DELETE NO ACTION
 	    ON UPDATE CASCADE
 );
