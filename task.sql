@@ -9,6 +9,14 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
+CREATE TABLE Products (
+    ID INT,
+    Name VARCHAR(50),
+    Description VARCHAR(100),
+    Price INT,
+    PRIMARY KEY (ID)
+);
+
 CREATE TABLE Warehouses (
     ID INT,
     Name VARCHAR(50),
@@ -18,13 +26,6 @@ CREATE TABLE Warehouses (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Products (
-    ID INT,
-    Name VARCHAR(50),
-    Description VARCHAR(100),
-    Price INT,
-    PRIMARY KEY (ID)
-);
 
 CREATE TABLE ProductInventory (
     ID INT,
