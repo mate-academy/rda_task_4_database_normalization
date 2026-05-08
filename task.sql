@@ -45,7 +45,7 @@ CREATE TABLE Products (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE ProductWarehouse (
+CREATE TABLE ProductInventory (
 	ProductID INT,
     FOREIGN KEY  (ProductID)
 		REFERENCES Products (ID)
@@ -75,7 +75,7 @@ INSERT INTO Streets (ID, Name, CityID)
 	VALUES (1, 'Street-1', 1);
 INSERT INTO Warehouses (ID, WarehouseName, StreetID)
 	VALUES (1, 'Warehouse-1', 1);
-INSERT INTO ProductWarehouse (ProductID, WarehouseID, Amount)
+INSERT INTO ProductInventory (ProductID, WarehouseID, Amount)
 	VALUES (1, 1, 2);
 
 
@@ -88,5 +88,5 @@ INSERT INTO Streets (ID, Name, CityID)
 	VALUES (2, 'Street-2', 2);
 INSERT INTO Warehouses (ID, WarehouseName, StreetID)
 	VALUES (2, 'Warehouse-2', 2);
-INSERT INTO ProductWarehouse (ProductID, WarehouseID, Amount)
+INSERT INTO ProductInventory (ProductID, WarehouseID, Amount)
 	VALUES (2, 2, 5);
