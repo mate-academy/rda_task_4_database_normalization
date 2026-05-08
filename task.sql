@@ -9,84 +9,48 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
-CREATE TABLE Cities (
+CREATE TABLE Product (
 	ID INT,
-    Name VARCHAR (50),
-    CountryID INT,
-	FOREIGN KEY (CountryID)
-		REFERENCES Countries (ID)
-		ON DELETE NO ACTION,
+    Name VARCHAR(50),
     PRIMARY KEY (ID)
-);
-
-CREATE TABLE Streets (
-	ID INT,
-    Name VARCHAR (50),
-    CityID INT,
-    FOREIGN KEY (CityID)
-		REFERENCES Cities (ID)
-		ON DELETE NO ACTION,
-	PRIMARY KEY (ID)
 );
 
 CREATE TABLE Warehouses (
 	ID INT,
-    WarehouseName VARCHAR(50),
-    StreetID INT,
-    FOREIGN KEY (StreetID)
-		REFERENCES Streets (ID)
-        ON DELETE NO ACTION,
-    PRIMARY KEY (ID)
-);
-
-CREATE TABLE Products (
-    ID INT,
-    ProductName VARCHAR(50),
+    Name VARCHAR(50),
+    CityName VARCHAR(50),
+    StreetName VARCHAR(50),
+    CountryID INT,
+    FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
     PRIMARY KEY (ID)
 );
 
 CREATE TABLE ProductInventory (
-	ProductID INT,
-    FOREIGN KEY  (ProductID)
-		REFERENCES Products (ID)
-        ON DELETE NO ACTION,
-    WarehouseID INT,
-	FOREIGN KEY  (WarehouseID)
-		REFERENCES Warehouses (ID)
-        ON DELETE NO ACTION,
+    ID INT,
     Amount INT,
-    PRIMARY KEY (ProductID, WarehouseID)
+    WarehouseID INT,
+	FOREIGN KEY (WarehouseID) REFERENCES Warehouses(ID) ON DELETE NO ACTION,
+	ProductID INT,
+	FOREIGN KEY (ProductID) REFERENCES Product(ID) ON DELETE NO ACTION,
+    PRIMARY KEY (ID)
 );
 
 -- Populate test data
 
 INSERT INTO Countries (ID,Name)
 	VALUES (1, 'Country1');
-INSERT INTO Countries (ID,Name)
-	VALUES (2, 'Country2');
-
-
-
-INSERT INTO Products (ID, ProductName)
+INSERT INTO Product (ID, Name)
 	VALUES (1, 'AwersomeProduct');
-INSERT INTO Cities (ID, Name, CountryID)
-	VALUES (1, 'City-1', 1);
-INSERT INTO Streets (ID, Name, CityID)
-	VALUES (1, 'Street-1', 1);
-INSERT INTO Warehouses (ID, WarehouseName, StreetID)
-	VALUES (1, 'Warehouse-1', 1);
-INSERT INTO ProductInventory (ProductID, WarehouseID, Amount)
-	VALUES (1, 1, 2);
+INSERT INTO Warehouses (ID, Name, CityName, StreetName, CountryID)
+	VALUES (1, 'Warehouse-1', 'City-1', 'Street-1', 1);
+INSERT INTO ProductInventory (ID, Amount, WarehouseID, ProductID)
+	VALUES (1, 2, 1, 1);
 
-
-
-INSERT INTO Products (ID, ProductName)
+INSERT INTO Countries (ID, Name)
+	VALUES (2, 'Country2');
+INSERT INTO Product (ID, Name)
 	VALUES (2, 'AwersomeProduct');
-INSERT INTO Cities (ID, Name, CountryID)
-	VALUES (2, 'City-2', 2);
-INSERT INTO Streets (ID, Name, CityID)
-	VALUES (2, 'Street-2', 2);
-INSERT INTO Warehouses (ID, WarehouseName, StreetID)
-	VALUES (2, 'Warehouse-2', 2);
-INSERT INTO ProductInventory (ProductID, WarehouseID, Amount)
-	VALUES (2, 2, 5);
+INSERT INTO Warehouses (ID, Name, CityName, StreetName, CountryID)
+	VALUES (2, 'Warehouse-2', 'City-2', 'Street-2', 2);
+INSERT INTO ProductInventory (ID, Amount, WarehouseID, ProductID)
+	VALUES (2, 5, 2, 2);
