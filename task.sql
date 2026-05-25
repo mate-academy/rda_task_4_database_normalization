@@ -9,14 +9,28 @@ CREATE TABLE Countries (
     PRIMARY KEY (ID)
 );
 
+CREATE TABLE Warehouses (
+    ID INT,
+    Name VARCHAR(50),
+    Address VARCHAR(50),
+    CountryID INT,
+    CONSTRAINT fk_warehouse_country  FOREIGN KEY (CountryID) REFERENCES Countries(ID),
+    PRIMARY KEY (ID)
+);
+
+CREATE TABLE Products (
+    ID INT,
+    Name VARCHAR(50),
+    PRIMARY KEY (ID)
+);
+
 CREATE TABLE ProductInventory (
     ID INT,
-    ProductName VARCHAR(50),
-    WarehouseAmount INT,
-    WarehouseName VARCHAR(50),
-    WarehouseAddress VARCHAR(50), 
-    CountryID INT,
-	FOREIGN KEY (CountryID) REFERENCES Countries(ID) ON DELETE NO ACTION,
+    ProductID INT,
+    WarehouseID INT,
+    Amount INT,
+    CONSTRAINT fk_inventory_product FOREIGN KEY (ProductID) REFERENCES Products (ID),
+    CONSTRAINT fk_inventory_warehouse FOREIGN KEY (WarehouseID) REFERENCES Warehouses (ID),
     PRIMARY KEY (ID)
 );
 
@@ -26,8 +40,17 @@ INSERT INTO Countries (ID,Name)
 	VALUES (1, 'Country1');
 INSERT INTO Countries (ID,Name)
 	VALUES (2, 'Country2');
+
+ INSERT INTO Warehouses (ID, Name, Address, CountryID) 
+  VALUES (1, 'Warehouse-1', 'City-1, Street-1', 1);
+INSERT INTO Warehouses (ID, Name, Address, CountryID)
+  VALUES (2, 'Warehouse-2', 'City-2, Street-2', 2);
+
+INSERT INTO Products (ID, Name)
+  VALUES (1, 'AwersomeProduct');
+
     
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (1, 'AwersomeProduct', 2, 'Warehouse-1', 'City-1, Street-1',1);
-INSERT INTO ProductInventory (ID,ProductName,WarehouseAmount,WarehouseName,WarehouseAddress,CountryID)
-	VALUES (2, 'AwersomeProduct', 5, 'Warehouse-2', 'City-2, Street-2',2);
+INSERT INTO ProductInventory (ID,ProductID,WarehouseID,Amount)
+	 VALUES (1, 1, 1, 2);
+INSERT INTO ProductInventory (ID, ProductID, WarehouseID, Amount)
+    VALUES (2, 1, 2, 5);
