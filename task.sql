@@ -1,3 +1,5 @@
+DROP DATABASE IF EXISTS ShopDB;
+CREATE DATABASE ShopDB;
 USE ShopDB;
 
 -- 1. Countries Table (Remains the same)
