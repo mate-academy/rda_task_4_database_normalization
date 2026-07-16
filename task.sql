@@ -1,5 +1,6 @@
 -- Create database and tables
 
+DROP DATABASE IF EXISTS ShopDB;
 CREATE DATABASE ShopDB;
 USE ShopDB;
 
@@ -39,7 +40,7 @@ INSERT INTO Countries (ID,Name)
 	VALUES (2, 'Country2');
     
 INSERT INTO Products (ID,ProductName)
-	VALUES (1, 'AwersomeProduct');
+	VALUES (1, 'AwesomeProduct');
 INSERT INTO Warehouses (ID,WarehouseName,WarehouseAddress,CountryID)
 	VALUES (1, 'Warehouse-1', 'City-1, Street-1',1);
 INSERT INTO ProductInventory (ID,WarehouseAmount,ProductID,WarehouseID)
