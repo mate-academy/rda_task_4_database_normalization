@@ -32,7 +32,8 @@ CREATE TABLE ProductInventory (
     WarehouseAmount INT,
     WarehouseID INT,
     FOREIGN KEY (WarehouseID) REFERENCES Warehouse(ID) ON DELETE NO ACTION,
-    FOREIGN KEY (ProductID) REFERENCES Product(ID) ON DELETE NO ACTION
+    FOREIGN KEY (ProductID) REFERENCES Product(ID) ON DELETE NO ACTION,
+    PRIMARY KEY (ID)
 );
 
 -- Populate test data
@@ -49,9 +50,9 @@ INSERT INTO Warehouse (ID,WarehouseName,WarehouseAddress,CountryID)
 	VALUES (2, 'Warehouse-2', 'City-2, Street-2',2);
 
 INSERT INTO Product (ID,Name)
-	VALUES (1, 'AwersomeProduct'0
+	VALUES (1, 'AwersomeProduct');
 INSERT INTO Product (ID,Name)
-	VALUES (2, 'AwersomeProduct')
+	VALUES (2, 'AwersomeProduct');
 
     
 INSERT INTO ProductInventory (ID,ProductID,WarehouseAmount, WarehouseID)
